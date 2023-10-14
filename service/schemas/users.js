@@ -16,8 +16,11 @@ const user = new Schema(
       required: [true, "Email is required"],
       unique: true,
     },
+    token: {
+      type: String,
+    },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
 const User = mongoose.model("user", user);
