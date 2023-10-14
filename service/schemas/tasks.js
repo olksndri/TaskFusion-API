@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const { handleSaveError } = require("./hooks");
+const { handleSaveError, runValidateAtUpdate } = require("./hooks.js");
 
 const taskSchema = Schema(
   {
@@ -37,7 +37,10 @@ const taskSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
-const Task = model("task", taskSchema);
 taskSchema.post("save", handleSaveError);
+taskSchema.pre("findOneAndUpdate", runValidateAtUpdate);
+taskSchema.post("findOneAndUpdate", handleSaveError);
+
+const Task = model("task", taskSchema);
 
 module.exports = Task;

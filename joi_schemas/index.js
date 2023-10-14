@@ -1,4 +1,4 @@
 const { registerSchema } = require("./users-schemas");
-const { taskSchema } = require("./tasks-schemas");
+const { tasksSchema } = require("./tasks-schemas");
 
-module.exports = { registerSchema, taskSchema };
+module.exports = { registerSchema, tasksSchema };
