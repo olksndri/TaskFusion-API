@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
+mongoose.set("strictQuery", true);
 
 require("dotenv").config();
 
