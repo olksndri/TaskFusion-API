@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { handleSaveError } = require("./hooks");
 
 const taskSchema = Schema(
   {
@@ -37,5 +38,6 @@ const taskSchema = Schema(
 );
 
 const Task = model("task", taskSchema);
+taskSchema.post("save", handleSaveError);
 
 module.exports = Task;
