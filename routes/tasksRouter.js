@@ -1,7 +1,7 @@
 const express = require("express");
 const { tasksSchema } = require("../joi_schemas/index.js");
 const { validateBody } = require("../decorators/index.js");
-const tasksController = require("../controllers/tasks");
+const tasksController = require("../controllers/tasksController.js");
 
 const tasksAddValidate = validateBody(tasksSchema);
 
