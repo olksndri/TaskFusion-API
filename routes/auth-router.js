@@ -2,15 +2,18 @@ const express = require("express");
 
 const {
   registerValidateBody,
+  loginValidateBody,
   //   auth,
   //   createToken,
 } = require("../middleware/index");
+
 const { registerUserCtrl } = require("../controllers/auth-controller");
 
-const router = express.Router();
+const authRouter = express.Router();
 
-router.post("/register", registerValidateBody, registerUserCtrl);
 
-router.post("/login");
+authRouter.post("/register", registerValidateBody, registerUserCtrl);
 
-module.exports = router;
+authRouter.post("/login", loginValidateBody, );
+
+module.exports = authRouter;
