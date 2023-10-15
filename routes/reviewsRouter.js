@@ -3,10 +3,13 @@ const express = require("express");
 const reviewsController = require("../controllers/reviewsController.js");
 const { validateBody } = require("../decorators/index.js")
 const { reviewsSchema } = require("../joi_schemas/index.js");
+const { auth } = require("../middleware/auth.js");
 
 const reviewsAddValidate = validateBody(reviewsSchema);
 
 const reviewsRouter = express.Router();
+
+reviewsRouter.use(auth);
 
 reviewsRouter.get("/", reviewsController.getAll);
 
