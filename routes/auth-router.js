@@ -7,13 +7,16 @@ const {
   //   createToken,
 } = require("../middleware/index");
 
-const { registerUserCtrl } = require("../controllers/auth-controller");
+const {
+  registerUserCtrl,
+  loginCtrl,
+} = require("../controllers/auth-controller");
 
 const authRouter = express.Router();
 
 
 authRouter.post("/register", registerValidateBody, registerUserCtrl);
 
-authRouter.post("/login", loginValidateBody, );
+authRouter.post("/login", loginValidateBody, loginCtrl);
 
 module.exports = authRouter;
