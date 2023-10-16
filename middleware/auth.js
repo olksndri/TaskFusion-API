@@ -1,7 +1,6 @@
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
 
 const { httpError } = require("../utilities/index");
 const { findUserByEmail } = require("../service/index");
@@ -40,15 +39,6 @@ const auth = (req, res, next) => {
   // ? IIFE - passport.auth має приймати req, res, next, тому він одразу після конфігурування негайно викликається із цими аргументами.
 };
 
-// ? Функція створює токен та записує у req.user.token. Використовувати як мідлвару.
-const createToken = (req, res, next) => {
-  const payload = { email: req.body.email };
-  const token = jwt.sign(payload, JWT_SECRET);
-  req.user.token = token;
-  next();
-};
-
 module.exports = {
   auth,
-  createToken,
 };

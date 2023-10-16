@@ -1,8 +1,7 @@
 const { registerValidateBody } = require("./validation/auth-validaton");
-const { auth, createToken } = require("./auth");
+const { auth } = require("./auth");
 
 module.exports = {
   registerValidateBody,
   auth,
-  createToken,
 };
