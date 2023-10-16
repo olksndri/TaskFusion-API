@@ -1,0 +1,13 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Task Fusion",
+    "version": "1.0.0"
+  },
+  "schemes": ["http", "https"],
+  "consumes": ["application/json", "multipart/form-data"],
+  "produces": ["application/json"],
+  "servers": [{ "url": "https://taskfusion-service.onrender.com" }],
+  "paths": {},
+  "definitions": {}
+}
