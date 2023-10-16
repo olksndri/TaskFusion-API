@@ -28,6 +28,10 @@ const userSchema = new Schema(
     token: {
       type: String,
     },
+    avatar: {
+      type: String,
+      default: null,
+    },
   },
   { versionKey: false, timestamps: true }
 );

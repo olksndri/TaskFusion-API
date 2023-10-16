@@ -1,3 +1,7 @@
-const { registerUser, findUserByEmail } = require("./auth-service");
+const {
+  registerUser,
+  findUserByEmail,
+  findUserAndUpdate,
+} = require("./auth-service");
 
-module.exports = { registerUser, findUserByEmail };
+module.exports = { registerUser, findUserByEmail, findUserAndUpdate };

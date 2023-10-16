@@ -1,3 +1,4 @@
-const { httpError } = require("./http-error");
+const { HttpError } = require("./http-error");
+const { cloudinary } = require("./cloudinary");
 
-module.exports = { httpError };
+module.exports = { HttpError, cloudinary };
