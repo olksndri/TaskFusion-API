@@ -18,13 +18,11 @@ const registerUserCtrl = async (req, res, next) => {
   const user = await findUserByEmail(email);
 
   if (user) {
-    throw HttpError(409, "Email already exist");
+    return next(HttpError(409, "Email already exist"));
   }
   const hashPassword = await bcrypt.hash(password, 10);
-  const newUser = await registerUser(req.body, hashPassword);
+  await registerUser(req.body, hashPassword);
   res.status(201).json({
-    username: newUser.name,
-    email: newUser.email,
     message: "User successfully registered",
   });
 };
@@ -32,13 +30,13 @@ const registerUserCtrl = async (req, res, next) => {
 const loginCtrl = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await findUserByEmail(email);
-  if (!user) {
-    throw HttpError(401, "Email or password invalid");
+  if (!user) { 
+    return next(HttpError(401, "Email or password invalid"));
   }
-  const passwordCompare = await bcrypt.compare(password, user.password);
-  if (!passwordCompare) {
-    throw HttpError(401, "Email or password invalid");
-  }
+   const passwordCompare = await bcrypt.compare(password, user.password);
+   if (!passwordCompare) {
+    return next(HttpError(401, "Email or password invalid"));
+   }
 
   const { _id: id } = user;
 
@@ -54,13 +52,14 @@ const loginCtrl = async (req, res, next) => {
 
 const getCurrent = (req, res) => {
   const { name, email } = req.user;
+
   res.json({ name, email });
 };
 
 const signout = async (req, res) => {
   const { _id } = req.user;
-
   await User.findByIdAndUpdate(_id, { token: "" });
+
   res.json({ message: "Logout success" });
 };
 
