@@ -1,5 +1,11 @@
-const { registerUser } = require("./auth-controller");
+const {
+  registerUserCtrl,
+  loginCtrl,
+  getCurrent,
+} = require("./auth-controller");
 
 module.exports = {
-  registerUser,
+  registerUserCtrl,
+  loginCtrl,
+  getCurrent,
 };
