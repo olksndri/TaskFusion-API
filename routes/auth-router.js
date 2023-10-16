@@ -2,18 +2,28 @@ const express = require("express");
 
 const {
   registerValidateBody,
-  //   auth,
-  //   createToken,
-  upload,
+   loginValidateBody,
+  auth,
+ upload
 } = require("../middleware/index");
-const { registerUserCtrl } = require("../controllers/auth-controller");
 
-const router = express.Router();
+const {
+  registerUserCtrl,
+  loginCtrl,
+  getCurrent,
+  signout,
+} = require("../controllers/auth-controller");
 
-router.post("/register", registerValidateBody, registerUserCtrl);
+const authRouter = express.Router();
 
-router.post("/login");
+authRouter.post("/register", registerValidateBody, registerUserCtrl);
 
-router.patch("/edit", upload.single("avatar", 1));
+authRouter.post("/login", loginValidateBody, loginCtrl);
 
-module.exports = router;
+authRouter.get("/current", auth, getCurrent);
+
+authRouter.post("/logout", auth, signout);
+
+authRouter.patch("/edit", upload.single("avatar", 1));
+
+module.exports = authRouter;

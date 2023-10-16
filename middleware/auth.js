@@ -27,6 +27,7 @@ passport.use(
   })
 );
 
+
 // ? Функція аутентифікує користувача по JWT. Використовувати як мідлвару.
 const auth = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, async (err, user) => {
