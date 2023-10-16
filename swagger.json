@@ -7,7 +7,127 @@
   "schemes": ["http", "https"],
   "consumes": ["application/json", "multipart/form-data"],
   "produces": ["application/json"],
-  "servers": [{ "url": "https://taskfusion-service.onrender.com" }],
-  "paths": {},
-  "definitions": {}
+  "servers": [
+    { "url": "https://taskfusion-service.onrender.com" },
+    { "url": "localhost:3000" }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication and authorization endpoints"
+    },
+    {
+      "name": "Reviews",
+      "description": "Reviews endpoints"
+    },
+    {
+      "name": "Tasks",
+      "description": "Tasks endpoints"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User registration",
+
+        "parameters": [],
+        "security": [{}],
+
+        "requestBody": {
+          "description": "Registration object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RegistrationRequest" }
+            }
+          },
+
+          "responses": {
+            "201": {
+              "description": "Created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/RegistrationResponse201"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {}
+            },
+            "409": {
+              "description": "Conflict",
+              "content": {}
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User login"
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User logout"
+      }
+    },
+    "/users/current": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "Get current user data"
+      }
+    },
+    "/users/edit": {
+      "patch": {
+        "tags": ["Auth"],
+        "summary": "Change current user data"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegistrationRequest": {
+        "type": "object",
+        "required": ["email", "password", "name"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "examplePass12345"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Joe Doe"
+          }
+        }
+      },
+      "RegistrationResponse201": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "User successfully registered"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  }
 }

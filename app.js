@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use("/users", authRouter);
+app.use("/auth", authRouter);
 app.use("/reviews", reviewsRouter);
 
 app.use((req, res) => {
