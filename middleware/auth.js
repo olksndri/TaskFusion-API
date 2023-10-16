@@ -40,7 +40,6 @@ const auth = (req, res, next) => {
   // ? IIFE - passport.auth має приймати req, res, next, тому він одразу після конфігурування негайно викликається із цими аргументами.
 };
 
-
 module.exports = {
   auth,
 };

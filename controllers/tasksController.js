@@ -1,6 +1,6 @@
 const Task = require("../service/schemas/tasks");
 const User = require("../service/schemas/users");
-const { httpError } = require("../utilities/index.js");
+const { HttpError } = require("../utilities/index.js");
 const { ctrlWrapper } = require("../decorators/index.js");
 
 const getAll = async (req, res) => {
@@ -40,7 +40,7 @@ const add = async (req, res) => {
   try {
     const user = await User.findById(owner);
     if (!user) {
-      throw new httpError(404, "User not found");
+      throw new HttpError(404, "User not found");
     }
     const result = await Task.create({ ...req.body, owner });
     res.status(201).json(result);
@@ -57,7 +57,7 @@ const updateById = async (req, res) => {
       new: true,
     });
     if (!updatedTask) {
-      throw new httpError(404, "Task not found");
+      throw new HttpError(404, "Task not found");
     }
 
     res.json(updatedTask);
@@ -72,7 +72,7 @@ const deleteById = async (req, res) => {
   try {
     const result = await Task.findOneAndDelete({ _id: id, owner });
     if (!result) {
-      throw httpError(404, `Task with id ${id} does not exist`);
+      throw HttpError(404, `Task with id ${id} does not exist`);
     }
     res.json({ message: "Deleted successfully!" });
   } catch (error) {
