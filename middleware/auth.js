@@ -2,7 +2,7 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const passport = require("passport");
 
-const { httpError } = require("../utilities/index");
+const { HttpError } = require("../utilities/index");
 const { findUserByEmail } = require("../service/index");
 
 const { JWT_SECRET } = process.env;
@@ -32,7 +32,7 @@ passport.use(
 const auth = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, async (err, user) => {
     if (err || !user) {
-      return next(httpError(401));
+      return next(HttpError(401));
     }
     req.user = user;
     next();

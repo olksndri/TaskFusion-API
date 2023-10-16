@@ -2,9 +2,9 @@ const express = require("express");
 
 const {
   registerValidateBody,
-   loginValidateBody,
+  loginValidateBody,
   auth,
- upload
+  upload,
 } = require("../middleware/index");
 
 const {
@@ -12,6 +12,7 @@ const {
   loginCtrl,
   getCurrent,
   signout,
+  testController,
 } = require("../controllers/auth-controller");
 
 const authRouter = express.Router();
@@ -24,6 +25,12 @@ authRouter.get("/current", auth, getCurrent);
 
 authRouter.post("/logout", auth, signout);
 
-authRouter.patch("/edit", upload.single("avatar", 1));
+// !  Example of using image uploading
+authRouter.patch(
+  "/test-path",
+  auth,
+  upload.single("avatar", 1),
+  testController
+);
 
 module.exports = authRouter;
