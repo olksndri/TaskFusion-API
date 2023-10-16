@@ -14,7 +14,7 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", cors(), swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/auth", authRouter);
 app.use("/reviews", reviewsRouter);

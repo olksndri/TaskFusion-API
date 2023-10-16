@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.3",
   "info": {
     "title": "Task Fusion",
     "version": "1.0.0"
@@ -9,8 +9,9 @@
   "produces": ["application/json"],
   "servers": [
     { "url": "https://taskfusion-service.onrender.com" },
-    { "url": "localhost:3000" }
+    { "url": "http://127.0.0.1:3000" }
   ],
+
   "tags": [
     {
       "name": "Auth",
@@ -41,26 +42,38 @@
             "application/json": {
               "schema": { "$ref": "#/components/schemas/RegistrationRequest" }
             }
-          },
+          }
+        },
 
-          "responses": {
-            "201": {
-              "description": "Created",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/RegistrationResponse201"
-                  }
+        "responses": {
+          "201": {
+            "description": "Registration success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse201"
                 }
               }
-            },
-            "400": {
-              "description": "Bad request",
-              "content": {}
-            },
-            "409": {
-              "description": "Conflict",
-              "content": {}
+            }
+          },
+          "400": {
+            "description": "Registration validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse400"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Registration conflict error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse409"
+                }
+              }
             }
           }
         }
@@ -69,25 +82,152 @@
     "/auth/login": {
       "post": {
         "tags": ["Auth"],
-        "summary": "User login"
+        "summary": "User login",
+
+        "parameters": [],
+        "security": [{}],
+
+        "requestBody": {
+          "description": "Login object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Login success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Login validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Login conflict error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse401"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/auth/logout": {
       "post": {
         "tags": ["Auth"],
-        "summary": "User logout"
+        "summary": "User logout",
+
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "204": {
+            "description": "Logout success response"
+          },
+          "401": {
+            "description": "Logout unauthorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponse401"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users/current": {
       "get": {
         "tags": ["Auth"],
-        "summary": "Get current user data"
+        "summary": "Get current user data",
+
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "200": {
+            "description": "Get current user success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse200"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Get current user unauthorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponse401"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users/edit": {
       "patch": {
         "tags": ["Auth"],
-        "summary": "Change current user data"
+        "summary": "Change current user data",
+
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "requestBody": {
+          "description": "Registration object",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": { "$ref": "#/components/schemas/EditUserRequest" }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Edit user info success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditUserResponse200"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Edit user info unauthorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponse401"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -122,12 +262,163 @@
             "example": "User successfully registered"
           }
         }
+      },
+      "RegistrationResponse400": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Email, password or name is invalid"
+          }
+        }
+      },
+      "RegistrationResponse409": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Email already exists"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "examplePass12345"
+          }
+        }
+      },
+      "LoginResponse200": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "xxxxx.yyyyy.zzzzz"
+          }
+        }
+      },
+      "LoginResponse400": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Email or password is invalid"
+          }
+        }
+      },
+      "LoginResponse401": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Email or password is wrong"
+          }
+        }
+      },
+      "LogoutResponse401": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Unauthorized"
+          }
+        }
+      },
+      "CurrentUserResponse200": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Joe Doe"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "User's avatar",
+            "example": "https://example.com/avatar/user123.jpg"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "examplePass12345"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "User's birthday",
+            "example": "03/01/1900"
+          },
+          "skype": {
+            "type": "string",
+            "description": "User's skype",
+            "example": "https://join.skype.com/invitehandle"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User's phone number",
+            "example": "38 (097) 000 00 00"
+          }
+        }
+      },
+      "EditUserRequest": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string",
+            "format": "binary"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Joe Doe"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "User's birthday",
+            "example": "03/01/1900"
+          },
+          "skype": {
+            "type": "string",
+            "description": "User's skype",
+            "example": "https://join.skype.com/invitehandle"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User's phone number",
+            "example": "38 (097) 000 00 00"
+          }
+        }
+      },
+      "EditUserResponse200": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "User info successfully updated"
+          }
+        }
       }
     },
     "securitySchemes": {
-      "type": "http",
-      "scheme": "bearer",
-      "bearerFormat": "JWT"
+      "Bearer": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" }
     }
   }
 }
