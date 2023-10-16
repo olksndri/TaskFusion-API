@@ -1,16 +1,23 @@
 const Joi = require("joi");
+const { emailRegexp, passRegexp } = require("../service/schemas");
 
 const registerSchema = Joi.object({
   name: Joi.string().required(),
 
-  password: Joi.string().required(),
+  password: Joi.string().min(6).pattern(passRegexp).required(),
 
   email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
-    })
+    .pattern(emailRegexp)
+    // .email({
+    //   minDomainSegments: 2,
+    //   tlds: { allow: ["com", "net"] },
+    // })
     .required(),
 });
 
-module.exports = { registerSchema };
+const loginSchema = Joi.object({
+  password: Joi.string().min(6).pattern(passRegexp).required(),
+  email: Joi.string().pattern(emailRegexp).required(),
+});
+
+module.exports = { registerSchema, loginSchema };
