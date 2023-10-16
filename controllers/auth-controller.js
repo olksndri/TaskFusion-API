@@ -36,10 +36,10 @@ const loginCtrl = async (req, res, next) => {
     throw httpError(401, "Email or password invalid");
   }
 
-  const {_id: id} = user
+  const {_id: id,} = user
 
   const payload = {
-    id
+    email
   };
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
@@ -55,6 +55,7 @@ const getCurrent = (req, res) => {
 
 const signout = async(req, res) => {
   const { _id } = req.user;
+
   await User.findByIdAndUpdate(_id, { token: "" });
   res.json({ message: "Logout success" });
 };

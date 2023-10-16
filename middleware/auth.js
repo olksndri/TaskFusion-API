@@ -44,26 +44,6 @@ const auth = (req, res, next) => {
 };
 
 
-// ? Функція аутентифікує користувача по JWT. Використовувати як мідлвару.
-const authenticate = async (req, res, next) => {
-  const { authorization = "" } = req.headers;
-  const [bearer, token] = authorization.split(" ");
-  if (bearer !== "Bearer") {
-    next(httpError(401));
-  }
-  try {
-    const { id } = jwt.verify(token, JWT_SECRET);
-    const user = await User.findById(id);
-    if (!user || !user.token || user.token !== token) {
-      next(httpError(401));
-    }
-    req.user = user;
-    next();
-  } catch {
-    next(httpError(401));
-  }
-};
-
 // ? Функція створює токен та записує у req.user.token. Використовувати як мідлвару.
 const createToken = (req, res, next) => {
   const payload = { email: req.body.email };
@@ -75,5 +55,4 @@ const createToken = (req, res, next) => {
 module.exports = {
   auth,
   createToken,
-  authenticate,
 };

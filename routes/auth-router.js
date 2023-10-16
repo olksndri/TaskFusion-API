@@ -3,8 +3,7 @@ const express = require("express");
 const {
   registerValidateBody,
   loginValidateBody,
-  authenticate,
-  //   createToken,
+  auth,
 } = require("../middleware/index");
 
 const {
@@ -20,8 +19,8 @@ authRouter.post("/register", registerValidateBody, registerUserCtrl);
 
 authRouter.post("/login", loginValidateBody, loginCtrl);
 
-authRouter.get("/current", authenticate, getCurrent);
+authRouter.get("/current", auth, getCurrent);
 
-authRouter.post("/logout", authenticate, signout);
+authRouter.post("/logout", auth, signout);
 
 module.exports = authRouter;
