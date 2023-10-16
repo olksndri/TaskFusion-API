@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const { registerUser, findUserByEmail } = require("../service/index");
 const { httpError } = require("../utilities");
 const { ctrlWrapper } = require("../decorators/index");
+const { User } = require("../service/schemas/users");
+
 
 const { JWT_SECRET } = process.env;
 
@@ -34,16 +36,32 @@ const loginCtrl = async (req, res, next) => {
     throw httpError(401, "Email or password invalid");
   }
 
+  const {_id: id} = user
+
   const payload = {
-    id: user._id,
+    id
   };
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
+  await User.findByIdAndUpdate(id, { token });
 
   res.json({ token });
+};
+
+const getCurrent = (req, res) => {
+  const { name, email } = req.user;
+  res.json({ name, email });
+};
+
+const signout = async(req, res) => {
+  const { _id } = req.user;
+  await User.findByIdAndUpdate(_id, { token: "" });
+  res.json({ message: "Logout success" });
 };
 
 module.exports = {
   registerUserCtrl: ctrlWrapper(registerUserCtrl),
   loginCtrl: ctrlWrapper(loginCtrl),
+  getCurrent: ctrlWrapper(getCurrent),
+  signout: ctrlWrapper(signout)
 };

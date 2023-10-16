@@ -7,6 +7,7 @@ const registerUser = async (body, pass) => {
 const findUserByEmail = async (email) => {
   return User.findOne({ email });
 };
+ 
 
 module.exports = {
   registerUser,

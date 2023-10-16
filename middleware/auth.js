@@ -2,6 +2,8 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const { User } = require("../service/schemas/users");
+
 
 const { httpError } = require("../utilities/index");
 const { findUserByEmail } = require("../service/index");
@@ -28,6 +30,7 @@ passport.use(
   })
 );
 
+
 // ? Функція аутентифікує користувача по JWT. Використовувати як мідлвару.
 const auth = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, async (err, user) => {
@@ -38,6 +41,27 @@ const auth = (req, res, next) => {
     next();
   })(req, res, next);
   // ? IIFE - passport.auth має приймати req, res, next, тому він одразу після конфігурування негайно викликається із цими аргументами.
+};
+
+
+// ? Функція аутентифікує користувача по JWT. Використовувати як мідлвару.
+const authenticate = async (req, res, next) => {
+  const { authorization = "" } = req.headers;
+  const [bearer, token] = authorization.split(" ");
+  if (bearer !== "Bearer") {
+    next(httpError(401));
+  }
+  try {
+    const { id } = jwt.verify(token, JWT_SECRET);
+    const user = await User.findById(id);
+    if (!user || !user.token || user.token !== token) {
+      next(httpError(401));
+    }
+    req.user = user;
+    next();
+  } catch {
+    next(httpError(401));
+  }
 };
 
 // ? Функція створює токен та записує у req.user.token. Використовувати як мідлвару.
@@ -51,4 +75,5 @@ const createToken = (req, res, next) => {
 module.exports = {
   auth,
   createToken,
+  authenticate,
 };
