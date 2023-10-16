@@ -5,7 +5,7 @@ const DATE_REGEXP =
 const timeFormat = "HH:MM";
 const dateFormat = "YYYY-MM-DD";
 
-const taskSchema = Joi.object({
+const tasksSchema = Joi.object({
   title: Joi.string().max(250).required(),
   start: Joi.string()
     .pattern(TIME_REGEXP)
@@ -29,4 +29,4 @@ const taskSchema = Joi.object({
   category: Joi.string().valid("to-do", "in-progress", "done").required(),
 });
 
-module.exports = { taskSchema };
+module.exports = { tasksSchema };
