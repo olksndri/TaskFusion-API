@@ -1,11 +1,8 @@
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
-const { User } = require("../service/schemas/users");
 
-
-const { httpError } = require("../utilities/index");
+const { HttpError } = require("../utilities/index");
 const { findUserByEmail } = require("../service/index");
 
 const { JWT_SECRET } = process.env;
@@ -35,7 +32,7 @@ passport.use(
 const auth = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, async (err, user) => {
     if (err || !user) {
-      return next(httpError(401));
+      return next(HttpError(401));
     }
     req.user = user;
     next();
@@ -44,15 +41,6 @@ const auth = (req, res, next) => {
 };
 
 
-// ? Функція створює токен та записує у req.user.token. Використовувати як мідлвару.
-const createToken = (req, res, next) => {
-  const payload = { email: req.body.email };
-  const token = jwt.sign(payload, JWT_SECRET);
-  req.user.token = token;
-  next();
-};
-
 module.exports = {
   auth,
-  createToken,
 };
