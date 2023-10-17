@@ -1,9 +1,9 @@
-const { httpError } = require("../utilities/index");
+const { HttpError } = require("../utilities/index");
 
 const validateBody = (schema) => {
   const foo = (req, res, next) => {
     const { error } = schema.validate(req.body);
-    return error ? next(httpError(400, error.message)) : next();
+    return error ? next(HttpError(400, error.message)) : next();
   };
   return foo;
 };

@@ -1,12 +1,15 @@
 const {
   registerValidateBody,
   loginValidateBody,
+  userUpdateValidateBody,
 } = require("./validation/auth-validaton");
-const { auth, createToken } = require("./auth");
+const { auth } = require("./auth");
+const { upload } = require("./upload");
 
 module.exports = {
   registerValidateBody,
   loginValidateBody,
+  userUpdateValidateBody,
   auth,
-  createToken,
+  upload,
 };

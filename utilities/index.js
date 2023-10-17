@@ -1,4 +1,5 @@
+const { cloudinary } = require("./cloudinary");
 const { HttpError } = require("./http-error");
-const { formatDate } = require("./formatDate.js");
+const formatDate = require("./formatDate");
 
-module.exports = { HttpError, formatDate };
+module.exports = { HttpError, cloudinary, formatDate };

@@ -20,4 +20,9 @@ const loginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
 });
 
-module.exports = { registerSchema, loginSchema };
+const updateSchema = Joi.object({
+  name: Joi.string(),
+  email: Joi.string().pattern(emailRegexp),
+});
+
+module.exports = { registerSchema, loginSchema, updateSchema };

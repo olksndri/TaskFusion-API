@@ -1,5 +1,4 @@
 const Task = require("../service/schemas/tasks");
-const User = require("../service/schemas/users");
 const { HttpError } = require("../utilities/index.js");
 const { ctrlWrapper } = require("../decorators/index.js");
 
