@@ -5,7 +5,7 @@ const passport = require("passport");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
-const { authRouter, reviewsRouter } = require("./routes/index");
+const { authRouter, reviewsRouter, userRouter } = require("./routes/index");
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -17,6 +17,7 @@ app.use(passport.initialize());
 app.use("/api-docs", cors(), swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
 app.use("/reviews", reviewsRouter);
 
 app.use((req, res) => {
