@@ -3,7 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const passport = require("passport");
 
-const { authRouter, reviewsRouter } = require("./routes/index");
+const { authRouter, reviewsRouter, tasksRouter } = require("./routes/index");
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -15,6 +15,7 @@ app.use(passport.initialize());
 
 app.use("/auth", authRouter);
 app.use("/reviews", reviewsRouter);
+app.use("/tasks", tasksRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
