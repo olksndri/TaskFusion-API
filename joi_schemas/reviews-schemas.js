@@ -1,10 +1,11 @@
 const Joi = require("joi");
 
 const reviewsSchema = Joi.object({
-    name: Joi.string().required(),
-    photo: Joi.string().required(),
-    rating: Joi.number().required(),
-    review: Joi.string().required(),
+  name: Joi.string().required().messages({
+    "any.required": "Name, comment or rating is invalid",
+  }),
+  rating: Joi.number().required(),
+  comment: Joi.string().required(),
 });
 
 module.exports = { reviewsSchema };

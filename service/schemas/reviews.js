@@ -7,15 +7,13 @@ const reviewSchema = new Schema(
       type: String,
       required: true,
     },
-    photo: {
-      type: String,
-    },
     rating: {
       type: Number,
+      required: true,
     },
-    review: {
+    comment: {
       type: String,
-      default: false,
+      required: true,
     },
     owner: {
       type: Schema.Types.ObjectId,

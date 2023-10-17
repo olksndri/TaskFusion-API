@@ -1,4 +1,4 @@
-const Review = require("../service/schemas/index.js");
+const Review = require("../service/schemas/reviews");
 
 const { HttpError } = require("../utilities/index.js");
 
@@ -10,10 +10,10 @@ const getAll = async (req, res) => {
 };
 
 const getById = async (req, res) => {
-  const { own } = req.params;
-  const result = await Review.find({ owner: own });
+  const { _id: owner } = req.user;
+  const result = await Review.find({ owner: owner });
   if (!result) {
-    throw HttpError(404, `Review with id=${own} not found`);
+    next(HttpError(404, `Not found`));
   }
 
   res.json(result);
@@ -22,30 +22,33 @@ const getById = async (req, res) => {
 const add = async (req, res) => {
   const { _id: owner } = req.user;
   const result = await Review.create({ ...req.body, owner });
-  res.status(201).json(result);
+  res.status(201).json({
+    result: result,
+    message: "Review successfully added",
+  });
 };
 
 const updateById = async (req, res) => {
-  const { own } = req.params;
-  const result = await Review.findOneAndUpdate({ owner: own }, req.body, {
+  const { _id: owner } = req.user;
+  const result = await Review.findOneAndUpdate({ owner: owner }, req.body, {
     new: true,
   });
   if (!result) {
-    throw HttpError(404, `Review with id=${own} not found`);
+    next(HttpError(404, "Not found"));
   }
 
   res.json(result);
 };
 
 const deleteById = async (req, res) => {
-  const { own } = req.params;
-  const result = await Review.findOneAndDelete(own);
+  const { _id: owner } = req.user;
+  const result = await Review.findOneAndDelete(owner);
   if (!result) {
-    throw HttpError(404, `Review with id=${own} not found`);
+    next(HttpError(404, "Not found"));
   }
 
   res.json({
-    message: "Delete success",
+    message: "Review successfully deleted",
   });
 };
 
