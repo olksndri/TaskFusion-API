@@ -1,13 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const fs = require("fs/promises");
 
-const {
-  registerUser,
-  findUserByEmail,
-  findUserAndUpdate,
-} = require("../service/index");
-const { HttpError, cloudinary } = require("../utilities");
+const { registerUser, findUserByEmail } = require("../service/index");
+const { HttpError } = require("../utilities");
 const { ctrlWrapper } = require("../decorators/index");
 const { User } = require("../service/schemas/users");
 
@@ -30,13 +25,13 @@ const registerUserCtrl = async (req, res, next) => {
 const loginCtrl = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await findUserByEmail(email);
-  if (!user) { 
+  if (!user) {
     return next(HttpError(401, "Email or password invalid"));
   }
-   const passwordCompare = await bcrypt.compare(password, user.password);
-   if (!passwordCompare) {
+  const passwordCompare = await bcrypt.compare(password, user.password);
+  if (!passwordCompare) {
     return next(HttpError(401, "Email or password invalid"));
-   }
+  }
 
   const { _id: id } = user;
 
@@ -50,12 +45,6 @@ const loginCtrl = async (req, res, next) => {
   res.json({ token });
 };
 
-const getCurrent = (req, res) => {
-  const { name, email } = req.user;
-
-  res.json({ name, email });
-};
-
 const signout = async (req, res) => {
   const { _id } = req.user;
   await User.findByIdAndUpdate(_id, { token: "" });
@@ -63,24 +52,8 @@ const signout = async (req, res) => {
   res.json({ message: "Logout success" });
 };
 
-const testController = async (req, res, next) => {
-  // ! Working with cloud
-  const { path } = req.file;
-  const options = {
-    use_filename: true,
-    folder: "TaskFusion_avatars",
-  };
-  const result = await cloudinary.uploader.upload(path, options);
-  await fs.rm(path);
-  const url = result.secure_url;
-  await findUserAndUpdate(req.user._id, url);
-  // ! Working with cloud
-};
-
 module.exports = {
   registerUserCtrl: ctrlWrapper(registerUserCtrl),
   loginCtrl: ctrlWrapper(loginCtrl),
-  getCurrent: ctrlWrapper(getCurrent),
   signout: ctrlWrapper(signout),
-  testController: ctrlWrapper(testController),
 };

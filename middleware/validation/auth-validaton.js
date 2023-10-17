@@ -1,7 +1,16 @@
-const { registerSchema, loginSchema } = require("../../joi_schemas");
+const {
+  registerSchema,
+  loginSchema,
+  updateSchema,
+} = require("../../joi_schemas");
 const { validateBody } = require("../../decorators/index");
 
 const registerValidateBody = validateBody(registerSchema);
 const loginValidateBody = validateBody(loginSchema);
+const userUpdateValidateBody = validateBody(updateSchema);
 
-module.exports = { registerValidateBody, loginValidateBody };
+module.exports = {
+  registerValidateBody,
+  loginValidateBody,
+  userUpdateValidateBody,
+};
