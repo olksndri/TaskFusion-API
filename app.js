@@ -15,7 +15,7 @@ app.use(passport.initialize());
 
 app.use("/auth", authRouter);
 app.use("/reviews", reviewsRouter);
-app.use("/api/tasks", tasksRouter);
+app.use("/tasks", tasksRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

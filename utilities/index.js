@@ -1,4 +1,4 @@
-const { httpError } = require("./http-error");
+const { HttpError } = require("./http-error");
 const { formatDate } = require("./formatDate.js");
 
-module.exports = { httpError, formatDate };
+module.exports = { HttpError, formatDate };
