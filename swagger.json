@@ -18,6 +18,10 @@
       "description": "Authentication and authorization endpoints"
     },
     {
+      "name": "Users",
+      "description": "Users endpoints"
+    },
+    {
       "name": "Reviews",
       "description": "Reviews endpoints"
     },
@@ -148,7 +152,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LogoutResponse401"
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
                 }
               }
             }
@@ -158,7 +162,7 @@
     },
     "/users/current": {
       "get": {
-        "tags": ["Auth"],
+        "tags": ["Users"],
         "summary": "Get current user data",
 
         "parameters": [],
@@ -180,7 +184,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LogoutResponse401"
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
                 }
               }
             }
@@ -190,14 +194,14 @@
     },
     "/users/edit": {
       "patch": {
-        "tags": ["Auth"],
+        "tags": ["Users"],
         "summary": "Change current user data",
 
         "parameters": [],
         "security": [{ "Bearer": [] }],
 
         "requestBody": {
-          "description": "Registration object",
+          "description": "Edit object",
           "required": true,
           "content": {
             "multipart/form-data": {
@@ -222,7 +226,232 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LogoutResponse401"
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Get all reviews",
+
+        "parameters": [],
+        "security": [],
+
+        "responses": {
+          "200": {
+            "description": "Get reviews success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetReviews200"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Edit user info unauthorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews/own": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Get own review",
+
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "200": {
+            "description": "Get user review success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetReviewResponse200"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Get user review unauthorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Get user review not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response404"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Reviews"],
+        "summary": "Add review",
+
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "requestBody": {
+          "description": "Review object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AddReviewRequest" }
+            }
+          }
+        },
+
+        "responses": {
+          "201": {
+            "description": "Add review success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddReviewResponse201"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Adding review validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddReviewResponse400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Add review unauthorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Reviews"],
+        "summary": "Update review",
+
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "requestBody": {
+          "description": "Review object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateReviewRequest" }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Update review success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateReviewResponse200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Update review validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddReviewResponse400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Update review unauthorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Update review not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response404"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "delete": {
+        "tags": ["Reviews"],
+        "summary": "Delete review",
+
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "200": {
+            "description": "Delete review success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteReviewResponse200"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Delete review unauthorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Delete review not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response404"
                 }
               }
             }
@@ -324,7 +553,7 @@
           }
         }
       },
-      "LogoutResponse401": {
+      "UnauthorizedResponse": {
         "type": "object",
         "properties": {
           "message": {
@@ -336,6 +565,10 @@
       "CurrentUserResponse200": {
         "type": "object",
         "properties": {
+          "_id": {
+            "type": "string",
+            "example": "some1351BSON142format232id"
+          },
           "email": {
             "type": "string",
             "description": "User's email",
@@ -413,6 +646,128 @@
           "message": {
             "type": "string",
             "example": "User info successfully updated"
+          }
+        }
+      },
+      "GetReviews200": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "some1351BSON142format232id"
+            },
+            "name": { "type": "string", "example": "Joe Doe" },
+            "comment": {
+              "type": "string",
+              "example": "Really helps to plan the day and visualize tasks. Exactly what I was looking for. Huge thanks to the developers! "
+            },
+            "rating": {
+              "type": "integer",
+              "example": 5
+            },
+            "ownerId": {
+              "type": "string",
+              "example": "some1351BSON142format232id"
+            }
+          }
+        }
+      },
+      "GetReviewResponse200": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "some1351BSON142format232id"
+          },
+          "name": { "type": "string", "example": "Joe Doe" },
+          "comment": {
+            "type": "string",
+            "example": "Really helps to plan the day and visualize tasks. Exactly what I was looking for. Huge thanks to the developers! "
+          },
+          "rating": {
+            "type": "integer",
+            "example": 5
+          },
+          "ownerId": {
+            "type": "string",
+            "example": "some1351BSON142format232id"
+          }
+        }
+      },
+      "AddReviewRequest": {
+        "type": "object",
+        "required": ["name", "comment", "rating"],
+        "properties": {
+          "name": { "type": "string", "example": "Joe Doe" },
+          "comment": {
+            "type": "string",
+            "example": "Really helps to plan the day and visualize tasks. Exactly what I was looking for. Huge thanks to the developers! "
+          },
+          "rating": {
+            "type": "integer",
+            "example": 5
+          }
+        }
+      },
+      "AddReviewResponse201": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Review successfully added"
+          }
+        }
+      },
+      "AddReviewResponse400": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Name, comment or rating is invalid"
+          }
+        }
+      },
+      "UpdateReviewRequest": {
+        "type": "object",
+        "required": true,
+        "properties": {
+          "name": { "type": "string", "example": "Joe Doe" },
+          "comment": {
+            "type": "string",
+            "example": "Really helps to plan the day and visualize tasks. Exactly what I was looking for. Huge thanks to the developers! "
+          },
+          "rating": {
+            "type": "integer",
+            "example": 5
+          }
+        }
+      },
+      "UpdateReviewResponse200": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Review successfully updated"
+          }
+        }
+      },
+      "DeleteReviewResponse200": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Review successfully deleted"
+          }
+        }
+      },
+      "Response404": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Not found"
           }
         }
       }
