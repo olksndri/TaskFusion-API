@@ -1,37 +1,47 @@
 const { Schema, model } = require("mongoose");
 const { handleSaveError, runValidateAtUpdate } = require("./hooks.js");
+const formatDate = require("../../utilities/index.js");
 
-const taskSchema = Schema(
+const taskSchema = new Schema(
   {
     title: {
       type: String,
       max: 250,
-      required: true,
+      default: "My Task",
+      required: [true, "Title is required"],
     },
     start: {
       type: String,
+      default: "09:00",
       required: [true, "Start time is required"],
     },
     end: {
       type: String,
+      default: "09:30",
       required: [true, "End time is required"],
     },
     priority: {
       type: String,
       enum: ["low", "medium", "high"],
       default: "low",
+      trim: true,
       required: [true, "Priority is required"],
     },
-    date: { type: String, required: [true, "Date is required"] },
+    date: {
+      type: String,
+      default: formatDate,
+      required: [true, "Date is required"],
+    },
     category: {
       type: String,
       enum: ["to-do", "in-progress", "done"],
+      default: "to-do",
+      trim: true,
       required: [true, "Category is required"],
     },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
-      required: true,
     },
   },
   { versionKey: false, timestamps: true }
