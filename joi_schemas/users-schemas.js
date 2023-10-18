@@ -22,7 +22,10 @@ const loginSchema = Joi.object({
 
 const updateSchema = Joi.object({
   name: Joi.string(),
-  email: Joi.string().pattern(emailRegexp),
+  email: Joi.string().pattern(emailRegexp).optional(),
+  birthday: Joi.string(),
+  skype: Joi.string(),
+  phone: Joi.string(),
 });
 
 module.exports = { registerSchema, loginSchema, updateSchema };

@@ -2,24 +2,18 @@ const express = require("express");
 
 const { userUpdateValidateBody, auth, upload } = require("../middleware/index");
 
-const {
-  getCurrent,
-  testController,
-  updateUser,
-} = require("../controllers/user-controller");
+const { getCurrent, updateUser } = require("../controllers/user-controller");
 
 const userRouter = express.Router();
 
 userRouter.get("/current", auth, getCurrent);
 
-userRouter.patch("/edit", auth, userUpdateValidateBody, updateUser);
-
-// !  Example of using image uploading
 userRouter.patch(
-  "/test-path",
+  "/edit",
   auth,
+  userUpdateValidateBody,
   upload.single("avatar", 1),
-  testController
+  updateUser
 );
 
 module.exports = userRouter;
