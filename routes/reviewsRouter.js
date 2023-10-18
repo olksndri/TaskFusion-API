@@ -9,16 +9,16 @@ const reviewsAddValidate = validateBody(reviewsSchema);
 
 const reviewsRouter = express.Router();
 
-reviewsRouter.use(auth);
-
 reviewsRouter.get("/", reviewsController.getAll);
 
-reviewsRouter.get("/:own", reviewsController.getById);
+reviewsRouter.use(auth);
 
-reviewsRouter.post("/", reviewsAddValidate, reviewsController.add);
+reviewsRouter.get("/own", reviewsController.getById);
 
-reviewsRouter.patch("/:own", reviewsController.updateById);
+reviewsRouter.post("/own", reviewsAddValidate, reviewsController.add);
 
-reviewsRouter.delete("/:own", reviewsController.deleteById);
+reviewsRouter.patch("/own", reviewsController.updateById);
+
+reviewsRouter.delete("/own", reviewsController.deleteById);
 
 module.exports = reviewsRouter;
