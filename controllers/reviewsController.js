@@ -2,14 +2,14 @@ const Review = require("../service/schemas/reviews");
 
 const { HttpError } = require("../utilities/index.js");
 
-const { ctrlWrapper } =require("../decorators/index.js");
+const { ctrlWrapper } = require("../decorators/index.js");
 
-const getAll = async (req, res) => {
+const getAll = async (req, res, next) => {
   const result = await Review.find();
   res.json(result);
 };
 
-const getById = async (req, res) => {
+const getById = async (req, res, next) => {
   const { _id: owner } = req.user;
   const result = await Review.find({ owner: owner });
   if (!result) {
@@ -19,7 +19,7 @@ const getById = async (req, res) => {
   res.json(result);
 };
 
-const add = async (req, res) => {
+const add = async (req, res, next) => {
   const { _id: owner } = req.user;
   const result = await Review.create({ ...req.body, owner });
   res.status(201).json({
@@ -28,7 +28,7 @@ const add = async (req, res) => {
   });
 };
 
-const updateById = async (req, res) => {
+const updateById = async (req, res, next) => {
   const { _id: owner } = req.user;
   const result = await Review.findOneAndUpdate({ owner: owner }, req.body, {
     new: true,
@@ -40,7 +40,7 @@ const updateById = async (req, res) => {
   res.json(result);
 };
 
-const deleteById = async (req, res) => {
+const deleteById = async (req, res, next) => {
   const { _id: owner } = req.user;
   const result = await Review.findOneAndDelete(owner);
   if (!result) {
