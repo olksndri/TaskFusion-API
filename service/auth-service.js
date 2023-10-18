@@ -1,7 +1,7 @@
 const { User } = require("./schemas/users");
 
-const registerUser = async (body, pass) => {
-  return User.create({ ...body, password: pass });
+const registerUser = async (body, pass, token) => {
+  return User.create({ ...body, password: pass, token });
 };
 
 const findUserByEmail = async (email) => {
