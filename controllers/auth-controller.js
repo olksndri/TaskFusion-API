@@ -9,16 +9,28 @@ const { User } = require("../service/schemas/users");
 const { JWT_SECRET } = process.env;
 
 const registerUserCtrl = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   const user = await findUserByEmail(email);
 
   if (user) {
     return next(HttpError(409, "Email already exist"));
   }
   const hashPassword = await bcrypt.hash(password, 10);
-  await registerUser(req.body, hashPassword);
+
+  const payload = {
+    email,
+  };
+
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
+
+  await registerUser(req.body, hashPassword, token);
+
+  const userData = { name, email };
+
   res.status(201).json({
     message: "User successfully registered",
+    userData,
+    token,
   });
 };
 
@@ -26,14 +38,16 @@ const loginCtrl = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await findUserByEmail(email);
   if (!user) {
-    return next(HttpError(401, "Email or password invalid"));
+    return next(HttpError(401, "Email or password is wrong"));
   }
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
-    return next(HttpError(401, "Email or password invalid"));
+    return next(HttpError(401, "Email or password is wrong"));
   }
 
-  const { _id: id } = user;
+  const { _id: id, email: mail, name } = user;
+
+  const userData = { name, mail };
 
   const payload = {
     email,
@@ -42,14 +56,14 @@ const loginCtrl = async (req, res, next) => {
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
   await User.findByIdAndUpdate(id, { token });
 
-  res.json({ token });
+  res.json({ token, userData });
 };
 
 const signout = async (req, res) => {
   const { _id } = req.user;
   await User.findByIdAndUpdate(_id, { token: "" });
 
-  res.json({ message: "Logout success" });
+  res.status(204);
 };
 
 module.exports = {
