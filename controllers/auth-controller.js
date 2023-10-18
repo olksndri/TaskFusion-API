@@ -38,11 +38,11 @@ const loginCtrl = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await findUserByEmail(email);
   if (!user) {
-    return next(HttpError(401, "Email or password invalid"));
+    return next(HttpError(401, "Email or password is wrong"));
   }
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
-    return next(HttpError(401, "Email or password invalid"));
+    return next(HttpError(401, "Email or password is wrong"));
   }
 
   const { _id: id, email: mail, name } = user;
