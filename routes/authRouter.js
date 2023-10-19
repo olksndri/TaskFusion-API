@@ -4,11 +4,16 @@ const {
   registerValidateBody,
   loginValidateBody,
   auth,
+  passport,
 } = require("../middleware/index");
 
 const { authCtrl } = require("../controllers");
 
 const authRouter = express.Router();
+
+authRouter.get("/google",passport.authenticate("google", { scope: ["email", "profile"] }));
+
+authRouter.get("/google/callback", passport.authenticate("google", { session: false }), authCtrl.googleAuth);
 
 authRouter.post("/register", registerValidateBody, authCtrl.registerUserCtrl);
 
