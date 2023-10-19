@@ -1,7 +1,7 @@
-const authRouter = require("./auth-router.js");
+const authRouter = require("./authRouter.js");
 const reviewsRouter = require("./reviewsRouter.js");
 const tasksRouter = require("./tasksRouter.js");
-const userRouter = require("./user-router.js")
+const userRouter = require("./usersRouter.js");
 
 module.exports = {
   authRouter,

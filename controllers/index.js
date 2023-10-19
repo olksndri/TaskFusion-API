@@ -1,11 +1,9 @@
-const {
-  registerUserCtrl,
-  loginCtrl,
-  getCurrent,
-} = require("./auth-controller");
+const authCtrl = require("./authController");
+const usersCtrl = require("./usersController");
+const reviewsCtrl = require("./reviewsController");
 
 module.exports = {
-  registerUserCtrl,
-  loginCtrl,
-  getCurrent,
+  authCtrl,
+  usersCtrl,
+  reviewsCtrl,
 };

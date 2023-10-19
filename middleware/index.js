@@ -2,10 +2,11 @@ const {
   registerValidateBody,
   loginValidateBody,
   userUpdateValidateBody,
-} = require("./validation/auth-validaton");
+} = require("./validation/authValidaton");
 const { auth } = require("./auth");
 const { upload } = require("./upload");
-const isValidTaskId = require("./isValidTaskId");
+const isValidTaskId = require("./validation/isValidTaskId");
+const { reviewsValidate } = require("./validation/reviewsValidation");
 
 module.exports = {
   registerValidateBody,
@@ -14,4 +15,5 @@ module.exports = {
   auth,
   upload,
   isValidTaskId,
+  reviewsValidate,
 };

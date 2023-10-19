@@ -1,15 +1,11 @@
-const {
-  registerSchema,
-  loginSchema,
-  updateSchema,
-} = require("./users-schemas");
-const { tasksSchema } = require("./tasks-schemas");
-const { reviewsSchema } = require("./reviews-schemas");
+const { registerSchema, loginSchema, updateSchema } = require("./usersSchemas");
+const { tasksSchema } = require("./tasksSchemas");
+const { reviewsSchema } = require("./reviewsSchemas");
 
 module.exports = {
   registerSchema,
   tasksSchema,
-  reviewsSchema,
   loginSchema,
   updateSchema,
+  reviewsSchema,
 };
