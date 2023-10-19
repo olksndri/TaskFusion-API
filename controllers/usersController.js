@@ -3,6 +3,7 @@ const fs = require("fs/promises");
 const { findUserAndUpdate } = require("../service/index");
 const { HttpError, cloudinary } = require("../utilities");
 const { ctrlWrapper } = require("../decorators/index");
+const { updateSchema } = require("../joi_schemas");
 
 const getCurrent = (req, res) => {
   const { _id, name, email, avatar, birthday, skype, phone } = req.user;
@@ -18,6 +19,16 @@ const getCurrent = (req, res) => {
 };
 
 const updateUser = async (req, res, next) => {
+  const { error } = updateSchema.validate(req.body);
+
+  if (error) {
+    if (req.file?.path) {
+      await fs.rm(req.file.path);
+    }
+    return next(HttpError(400, error.message));
+  }
+  // ! Validation (above)
+
   let url;
   if (req.file?.path) {
     const options = {
@@ -31,7 +42,8 @@ const updateUser = async (req, res, next) => {
     await fs.rm(req.file.path);
     url = cloudResult.url;
   }
-  // ! Working with cloud (above)
+  // ! Working with cloud and body validation (above)
+
   const updateResult = await findUserAndUpdate(req.user._id, {
     ...req.body,
     avatar: url,

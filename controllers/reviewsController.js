@@ -4,6 +4,8 @@ const { HttpError } = require("../utilities/index.js");
 
 const { ctrlWrapper } = require("../decorators/index.js");
 
+const { findReviewByOwner } = require("../service/index");
+
 const getAll = async (req, res, next) => {
   const result = await Review.find();
   res.json(result);
@@ -11,9 +13,9 @@ const getAll = async (req, res, next) => {
 
 const getById = async (req, res, next) => {
   const { _id: owner } = req.user;
-  const result = await Review.find({ owner: owner });
+  const result = await Review.findOne({ owner: owner });
   if (!result) {
-    next(HttpError(404, `Not found`));
+    return next(HttpError(404, `Not found`));
   }
 
   res.json(result);
@@ -21,6 +23,12 @@ const getById = async (req, res, next) => {
 
 const add = async (req, res, next) => {
   const { _id: owner } = req.user;
+
+  const isReviewExists = await findReviewByOwner(owner);
+  if (isReviewExists) {
+    return next(HttpError(409, "User already added review"));
+  }
+
   const result = await Review.create({ ...req.body, owner });
   res.status(201).json({
     result: result,
@@ -34,7 +42,7 @@ const updateById = async (req, res, next) => {
     new: true,
   });
   if (!result) {
-    next(HttpError(404, "Not found"));
+    return next(HttpError(404, "Not found"));
   }
 
   res.json(result);
@@ -42,9 +50,10 @@ const updateById = async (req, res, next) => {
 
 const deleteById = async (req, res, next) => {
   const { _id: owner } = req.user;
-  const result = await Review.findOneAndDelete(owner);
+  const result = await Review.findOneAndDelete({ owner });
+
   if (!result) {
-    next(HttpError(404, "Not found"));
+    return next(HttpError(404, "Not found"));
   }
 
   res.json({

@@ -1,4 +1,4 @@
-const { HttpError } = require("../utilities/index");
+const { HttpError } = require("../utilities");
 
 const ctrlWrapper = (ctrl) => {
   const foo = async (req, res, next) => {
