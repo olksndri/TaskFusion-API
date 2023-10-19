@@ -221,6 +221,16 @@
               }
             }
           },
+          "400": {
+            "description": "Edit user info validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditUserResponse400"
+                }
+              }
+            }
+          },
           "401": {
             "description": "Edit user info unauthorized error",
             "content": {
@@ -834,6 +844,15 @@
           "message": {
             "type": "string",
             "example": "User info successfully updated"
+          }
+        }
+      },
+      "EditUserResponse400": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Some joi validation error"
           }
         }
       },

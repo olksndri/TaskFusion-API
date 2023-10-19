@@ -2,9 +2,9 @@ const {
   registerUser,
   findUserByEmail,
   findUserAndUpdate,
-} = require("./auth-service");
+} = require("./authService");
 
-const { findReviewByOwner } = require("./review-service");
+const { findReviewByOwner } = require("./reviewsService");
 
 module.exports = {
   registerUser,
