@@ -2,6 +2,13 @@ const {
   registerUser,
   findUserByEmail,
   findUserAndUpdate,
-} = require("./auth-service");
+} = require("./authService");
 
-module.exports = { registerUser, findUserByEmail, findUserAndUpdate };
+const { findReviewByOwner } = require("./reviewsService");
+
+module.exports = {
+  registerUser,
+  findUserByEmail,
+  findUserAndUpdate,
+  findReviewByOwner,
+};

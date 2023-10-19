@@ -1,51 +1,63 @@
-const Review = require("../service/schemas/index.js");
+const Review = require("../service/schemas/reviews");
 
 const { HttpError } = require("../utilities/index.js");
 
-const { ctrlWrapper } =require("../decorators/index.js");
+const { ctrlWrapper } = require("../decorators/index.js");
 
-const getAll = async (req, res) => {
+const { findReviewByOwner } = require("../service/index");
+
+const getAll = async (req, res, next) => {
   const result = await Review.find();
   res.json(result);
 };
 
-const getById = async (req, res) => {
-  const { own } = req.params;
-  const result = await Review.find({ owner: own });
+const getById = async (req, res, next) => {
+  const { _id: owner } = req.user;
+  const result = await Review.findOne({ owner: owner });
   if (!result) {
-    throw HttpError(404, `Review with id=${own} not found`);
+    return next(HttpError(404, `Not found`));
   }
 
   res.json(result);
 };
 
-const add = async (req, res) => {
+const add = async (req, res, next) => {
   const { _id: owner } = req.user;
+
+  const isReviewExists = await findReviewByOwner(owner);
+  if (isReviewExists) {
+    return next(HttpError(409, "User already added review"));
+  }
+
   const result = await Review.create({ ...req.body, owner });
-  res.status(201).json(result);
+  res.status(201).json({
+    result: result,
+    message: "Review successfully added",
+  });
 };
 
-const updateById = async (req, res) => {
-  const { own } = req.params;
-  const result = await Review.findOneAndUpdate({ owner: own }, req.body, {
+const updateById = async (req, res, next) => {
+  const { _id: owner } = req.user;
+  const result = await Review.findOneAndUpdate({ owner: owner }, req.body, {
     new: true,
   });
   if (!result) {
-    throw HttpError(404, `Review with id=${own} not found`);
+    return next(HttpError(404, "Not found"));
   }
 
   res.json(result);
 };
 
-const deleteById = async (req, res) => {
-  const { own } = req.params;
-  const result = await Review.findOneAndDelete(own);
+const deleteById = async (req, res, next) => {
+  const { _id: owner } = req.user;
+  const result = await Review.findOneAndDelete({ owner });
+
   if (!result) {
-    throw HttpError(404, `Review with id=${own} not found`);
+    return next(HttpError(404, "Not found"));
   }
 
   res.json({
-    message: "Delete success",
+    message: "Review successfully deleted",
   });
 };
 

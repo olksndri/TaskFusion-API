@@ -1,24 +1,21 @@
 const express = require("express");
 
-const reviewsController = require("../controllers/reviewsController.js");
-const { validateBody } = require("../decorators/index.js");
-const { reviewsSchema } = require("../joi_schemas/index.js");
+const { reviewsCtrl } = require("../controllers");
 const { auth } = require("../middleware/auth.js");
-
-const reviewsAddValidate = validateBody(reviewsSchema);
+const { reviewsValidate } = require("../middleware");
 
 const reviewsRouter = express.Router();
 
+reviewsRouter.get("/", reviewsCtrl.getAll);
+
 reviewsRouter.use(auth);
 
-reviewsRouter.get("/", reviewsController.getAll);
+reviewsRouter.get("/own", reviewsCtrl.getById);
 
-reviewsRouter.get("/:own", reviewsController.getById);
+reviewsRouter.post("/own", reviewsValidate, reviewsCtrl.add);
 
-reviewsRouter.post("/", reviewsAddValidate, reviewsController.add);
+reviewsRouter.patch("/own", reviewsValidate, reviewsCtrl.updateById);
 
-reviewsRouter.patch("/:own", reviewsController.updateById);
-
-reviewsRouter.delete("/:own", reviewsController.deleteById);
+reviewsRouter.delete("/own", reviewsCtrl.deleteById);
 
 module.exports = reviewsRouter;
