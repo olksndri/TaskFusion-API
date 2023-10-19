@@ -45,19 +45,19 @@ const updateById = async (req, res, next) => {
     new: true,
   });
   if (!updatedTask) {
-    next(HttpError(404, "Task not found"));
+    next(HttpError(404, `Task with id ${taskId} is not found`));
   }
 
   res.json(updatedTask);
 };
 
 const deleteById = async (req, res, next) => {
-  const { id } = req.params;
+  const { taskId } = req.params;
   const { _id: owner } = req.user;
 
-  const result = await Task.findOneAndDelete({ _id: id, owner });
+  const result = await Task.findByIdAndRemove({ _id: taskId, owner });
   if (!result) {
-    next(HttpError(404, `Task with id ${id} not found`));
+    next(HttpError(404, `Task with id ${taskId} not found`));
   }
   res.json({ message: "Task deleted successfully!" });
 };
