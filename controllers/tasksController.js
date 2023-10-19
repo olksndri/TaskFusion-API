@@ -4,7 +4,7 @@ const { ctrlWrapper } = require("../decorators/index.js");
 
 const getAll = async (req, res, next) => {
   const { year, month } = req.query;
-  const { id: owner } = req.user;
+  const { _id: owner } = req.user;
   const currentMonth = `${year}-${month.toString().padStart(2, "0")}`;
 
   const tasks = await Task.find({
@@ -39,25 +39,44 @@ const add = async (req, res, next) => {
 };
 
 const updateById = async (req, res, next) => {
-  const { taskId } = req.params;
+  const { id } = req.params;
+  const { _id: owner } = req.user;
 
-  const updatedTask = await Task.findByIdAndUpdate(taskId, req.body, {
+  if (!owner) {
+    return next(HttpError(400, "Missing owner"));
+  }
+
+  if (!req.body) {
+    return next(HttpError(400, "Missing body of request"));
+  }
+
+  const { title, start, end, priority, date, category } = req.body;
+
+  if (!title || !start || !end || !priority || !date || !category) {
+    return next(HttpError(400, "Missing field"));
+  }
+
+  if (start >= end) {
+    return next(HttpError(400, "End time must be greater than Start time!"));
+  }
+
+  const updatedTask = await Task.findByIdAndUpdate(id, req.body, {
     new: true,
   });
   if (!updatedTask) {
-    next(HttpError(404, `Task with id ${taskId} is not found`));
+    next(HttpError(404, `Task with id ${id} not found`));
   }
 
   res.json(updatedTask);
 };
 
 const deleteById = async (req, res, next) => {
-  const { taskId } = req.params;
+  const { id } = req.params;
   const { _id: owner } = req.user;
 
-  const result = await Task.findByIdAndRemove({ _id: taskId, owner });
+  const result = await Task.findByIdAndRemove({ _id: id, owner });
   if (!result) {
-    next(HttpError(404, `Task with id ${taskId} not found`));
+    next(HttpError(404, `Task with id ${id} not found`));
   }
   res.json({ message: "Task deleted successfully!" });
 };

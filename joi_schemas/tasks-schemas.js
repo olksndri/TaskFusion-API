@@ -4,7 +4,7 @@ const DATE_REGEXP = /^\d{4}-((0[1-9])|(1[012]))-((0[1-9]|[12]\d)|3[01])$/;
 const timeFormat = "HH:MM";
 const dateFormat = "YYYY-MM-DD";
 
-const tasksSchema = Joi.object({
+const taskAddSchema = Joi.object({
   title: Joi.string()
     .max(250)
     .required()
@@ -41,4 +41,4 @@ const tasksSchema = Joi.object({
   category: Joi.string().valid("to-do", "in-progress", "done").required(),
 });
 
-module.exports = tasksSchema;
+module.exports = { taskAddSchema };

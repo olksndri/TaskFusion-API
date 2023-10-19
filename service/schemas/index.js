@@ -1,7 +1,7 @@
 const hooks = require("./hooks.js");
 const Review = require("./reviews.js");
 const { user, emailRegexp, passRegexp } = require("./users.js");
-const tasks = require("./tasks.js");
+const Task = require("./tasks.js");
 
 module.exports = {
   hooks,
@@ -9,5 +9,5 @@ module.exports = {
   user,
   emailRegexp,
   passRegexp,
-  tasks
+  Task
 };
