@@ -5,8 +5,10 @@ const {
 } = require("./validation/authValidaton");
 const { auth } = require("./auth");
 const { upload } = require("./upload");
+const passport = require("./google-authentificate")
 const isValidTaskId = require("./validation/isValidTaskId");
 const { reviewsValidate } = require("./validation/reviewsValidation");
+
 
 module.exports = {
   registerValidateBody,
@@ -14,6 +16,7 @@ module.exports = {
   userUpdateValidateBody,
   auth,
   upload,
+  passport,
   isValidTaskId,
   reviewsValidate,
 };

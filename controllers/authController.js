@@ -6,7 +6,7 @@ const { HttpError } = require("../utilities");
 const { ctrlWrapper } = require("../decorators/index");
 const { User } = require("../service/schemas/users");
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, FRONTEND_URL } = process.env;
 
 const registerUserCtrl = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -66,8 +66,21 @@ const signout = async (req, res) => {
   res.status(204).end();
 };
 
+const googleAuth = async (req, res) => {
+  const { _id: id } = req.user;
+  const payload = {
+    id,
+  };
+
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
+  await User.findByIdAndUpdate(id, { token });
+
+  res.redirect(`${FRONTEND_URL}/login?token=${token}`);
+};
+
 module.exports = {
   registerUserCtrl: ctrlWrapper(registerUserCtrl),
   loginCtrl: ctrlWrapper(loginCtrl),
   signout: ctrlWrapper(signout),
+  googleAuth: ctrlWrapper(googleAuth),
 };
