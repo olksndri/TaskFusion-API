@@ -1,5 +1,5 @@
 const { registerSchema, loginSchema, updateSchema } = require("./usersSchemas");
-const { taskAddSchema } = require("./tasksSchemas");
+const { taskAddSchema, taskUpdateSchema } = require("./tasksSchemas");
 const { reviewsSchema } = require("./reviewsSchemas");
 
 module.exports = {
@@ -8,4 +8,5 @@ module.exports = {
   loginSchema,
   updateSchema,
   reviewsSchema,
+  taskUpdateSchema,
 };

@@ -52,8 +52,8 @@ const updateById = async (req, res, next) => {
 
   const { title, start, end, priority, date, category } = req.body;
 
-  if (!title || !start || !end || !priority || !date || !category) {
-    return next(HttpError(400, "Missing field"));
+  if (!title && !start && !end && !priority && !date && !category) {
+    return next(HttpError(400, "Missing fields"));
   }
 
   if (start >= end) {
@@ -67,7 +67,7 @@ const updateById = async (req, res, next) => {
     next(HttpError(404, `Task with id ${id} not found`));
   }
 
-  res.json(updatedTask);
+  res.json({ updatedTask , message: "Task successfully updated" });
 };
 
 const deleteById = async (req, res, next) => {

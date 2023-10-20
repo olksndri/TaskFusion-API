@@ -443,7 +443,22 @@
         "tags": ["Tasks"],
         "summary": "Get tasks for month",
 
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "year",
+            "schema": { "type": "string" },
+            "example": "1900",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "month",
+            "schema": { "type": "string" },
+            "example": "03",
+            "required": true
+          }
+        ],
         "security": [{ "Bearer": [] }],
 
         "responses": {
@@ -1087,7 +1102,37 @@
       "AddTaskResponse201": {
         "type": "object",
         "properties": {
-          "message": { "type": "string", "example": "Task successfully added" }
+          "message": { "type": "string", "example": "Task added successfully" },
+          "result": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "example": "Brainstorm ideas for new content or products."
+              },
+              "start": { "type": "string", "example": "09:00" },
+              "end": { "type": "string", "example": "21:00" },
+              "priority": { "type": "string", "example": "low" },
+              "date": { "type": "string", "example": "YYYY-MM-DD" },
+              "category": { "type": "string", "example": "to-do" },
+              "owner": {
+                "type": "string",
+                "example": "some1351BSON142format232id"
+              },
+              "_id": {
+                "type": "string",
+                "example": "some1351BSON142format232id"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2023-10-20T13:58:47.820Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2023-10-20T13:58:47.820Z"
+              }
+            }
+          }
         }
       },
       "AddTaskResponse400": {
@@ -1129,6 +1174,36 @@
       "UpdateTaskResponse200": {
         "type": "object",
         "properties": {
+          "updatedTask": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "example": "Updated title"
+              },
+              "start": { "type": "string", "example": "09:00" },
+              "end": { "type": "string", "example": "21:00" },
+              "priority": { "type": "string", "example": "low" },
+              "date": { "type": "string", "example": "YYYY-MM-DD" },
+              "category": { "type": "string", "example": "to-do" },
+              "owner": {
+                "type": "string",
+                "example": "some1351BSON142format232id"
+              },
+              "_id": {
+                "type": "string",
+                "example": "some1351BSON142format232id"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2023-10-20T13:58:47.820Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2023-10-20T13:58:47.820Z"
+              }
+            }
+          },
           "message": {
             "type": "string",
             "example": "Task successfully updated"
