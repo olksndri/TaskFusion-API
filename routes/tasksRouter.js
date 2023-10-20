@@ -1,21 +1,23 @@
 const express = require("express");
-const tasksSchema = require("../joi_schemas/index.js");
+const { taskAddSchema } = require("../joi_schemas/index.js");
 const { validateBody } = require("../decorators/index.js");
 const tasksController = require("../controllers/tasksController.js");
 const { auth, isValidTaskId } = require("../middleware/index.js");
-const tasksAddValidate = validateBody(tasksSchema);
+
+const tasksAddValidate = validateBody(taskAddSchema);
 
 const tasksRouter = express.Router();
 
-tasksRouter.get("/", auth, tasksController.getAll);
-tasksRouter.post("/", auth, tasksAddValidate, tasksController.add);
+tasksRouter.use(auth);
+
+tasksRouter.get("/", tasksController.getAll); //http://127.0.0.1:3000/tasks?year=2023&month=11
+tasksRouter.post("/", tasksAddValidate, tasksController.add);
 tasksRouter.patch(
   "/:id",
-  auth,
   isValidTaskId,
   tasksAddValidate,
   tasksController.updateById
 );
-tasksRouter.delete("/:id", auth, isValidTaskId, tasksController.deleteById);
+tasksRouter.delete("/:id", isValidTaskId, tasksController.deleteById);
 
 module.exports = tasksRouter;
