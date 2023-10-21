@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Task Fusion",
-    "version": "1.3.4"
+    "version": "1.3.5"
   },
   "schemes": ["http", "https"],
   "consumes": ["application/json", "multipart/form-data"],
