@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const { handleSaveError, runValidateAtUpdate }= require("./hooks.js");
+const { handleSaveError, runValidateAtUpdate } = require("./hooks.js");
 
 const reviewSchema = new Schema(
   {
@@ -7,7 +7,7 @@ const reviewSchema = new Schema(
       type: Number,
       required: true,
     },
-    comment: {
+    review: {
       type: String,
       required: true,
     },
