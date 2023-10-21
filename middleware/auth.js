@@ -3,7 +3,7 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 const passport = require("passport");
 
 const { HttpError } = require("../utilities/index");
-const { findUserByEmail } = require("../service/index");
+const { findUserById } = require("../service/index");
 
 const { JWT_SECRET } = process.env;
 
@@ -15,7 +15,7 @@ const opts = {
 passport.use(
   new JwtStrategy(opts, async (jwtPayload, done) => {
     try {
-      const user = await findUserByEmail(jwtPayload.email);
+      const user = await findUserById(jwtPayload.id);
       if (user) {
         return done(null, user);
       } else {

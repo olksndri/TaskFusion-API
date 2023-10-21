@@ -1,7 +1,11 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const { registerUser, findUserByEmail } = require("../service/index");
+const {
+  registerUser,
+  findUserByEmail,
+  updateUserByEmail,
+} = require("../service/index");
 const { HttpError } = require("../utilities");
 const { ctrlWrapper } = require("../decorators/index");
 const { User } = require("../service/schemas/users");
@@ -17,13 +21,15 @@ const registerUserCtrl = async (req, res, next) => {
   }
   const hashPassword = await bcrypt.hash(password, 10);
 
+  const registeredUser = await registerUser(req.body, hashPassword);
+
   const payload = {
-    email,
+    id: registeredUser._id,
   };
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
 
-  await registerUser(req.body, hashPassword, token);
+  await updateUserByEmail(email, { token });
 
   const userData = { name, email };
 
@@ -38,11 +44,11 @@ const loginCtrl = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await findUserByEmail(email);
   if (!user) {
-    return next(HttpError(401, "Email or password is wrong"));
+    return next(HttpError(401, "Email is wrong"));
   }
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
-    return next(HttpError(401, "Email or password is wrong"));
+    return next(HttpError(401, "Password is wrong"));
   }
 
   const { _id: id, email: mail, name } = user;
@@ -50,7 +56,7 @@ const loginCtrl = async (req, res, next) => {
   const userData = { name, mail };
 
   const payload = {
-    email,
+    id: user._id,
   };
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
