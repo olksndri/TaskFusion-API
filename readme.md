@@ -22,8 +22,6 @@ TaskFusion-API **base-url**: https://taskfusion-service.onrender.com
 
 TaskFusion-API **swagger-документація**: https://taskfusion-service.onrender.com/api-docs/
 
-
-
 # Повний стек технологій
 <img align="left" src="https://th.bing.com/th/id/OIP.fxMFAWgcs9ASnyZoIMeLJAHaHa?pid=ImgDet&rs=1" alt="JavaScript"  height="60">
 <img align="left" src="https://th.bing.com/th/id/OIP.JzMKygYxjaVL4OWIIl7sXgHaIb?pid=ImgDet&rs=1" alt="NodeJS"  height="60">
@@ -34,9 +32,11 @@ TaskFusion-API **swagger-документація**: https://taskfusion-service.
 <img align="left" src="https://images.credly.com/images/e6eebd0c-6a17-4c06-b172-02ca9f6beb06/eslint.png" alt="ESlint"  height="60">
 <img align="left" src="https://play-lh.googleusercontent.com/3C-hB-KWoyWzZjUnRsXUPu-bqB3HUHARMLjUe9OmPoHa6dQdtJNW30VrvwQ1m7Pln3A" alt="JSONWebToken"  height="60">
 <img align="left" src="https://s3.amazonaws.com/media-p.slid.es/uploads/332149/images/2620503/Git-Icon-1788C.png" alt="Git"  height="60">
-<br />
-<br />
-<br />
+
+<br> 
+<br> 
+<br> 
+
 
 # Команда розробників:
 coming soon....
