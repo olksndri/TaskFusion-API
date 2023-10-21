@@ -880,7 +880,6 @@
               "type": "string",
               "example": "some1351BSON142format232id"
             },
-            "name": { "type": "string", "example": "Joe Doe" },
             "comment": {
               "type": "string",
               "example": "Really helps to plan the day and visualize tasks. Exactly what I was looking for. Huge thanks to the developers! "
@@ -889,9 +888,22 @@
               "type": "integer",
               "example": 5
             },
-            "ownerId": {
-              "type": "string",
-              "example": "some1351BSON142format232id"
+            "owner": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "some1351BSON142format232id"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Joe Doe"
+                },
+                "avatar": {
+                  "type": "string",
+                  "example": "https://example.com/avatar/user123.jpg"
+                }
+              }
             },
             "createdAt": {
               "type": "string",
