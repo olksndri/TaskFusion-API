@@ -2,6 +2,7 @@ const {
   registerUser,
   findUserByEmail,
   findUserAndUpdate,
+  findAllUsers,
 } = require("./authService");
 
 const { findReviewByOwner } = require("./reviewsService");
@@ -11,4 +12,5 @@ module.exports = {
   findUserByEmail,
   findUserAndUpdate,
   findReviewByOwner,
+  findAllUsers,
 };

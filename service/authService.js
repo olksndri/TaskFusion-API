@@ -16,8 +16,13 @@ const findUserAndUpdate = async (id, body) => {
   return User.findByIdAndUpdate(id, body);
 };
 
+const findAllUsers = async () => {
+  return User.find();
+};
+
 module.exports = {
   registerUser,
   findUserByEmail,
   findUserAndUpdate,
+  findAllUsers,
 };

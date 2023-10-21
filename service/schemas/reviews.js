@@ -3,10 +3,6 @@ const { handleSaveError, runValidateAtUpdate }= require("./hooks.js");
 
 const reviewSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
     rating: {
       type: Number,
       required: true,

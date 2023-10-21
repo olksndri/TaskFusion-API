@@ -22,8 +22,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage, limits });
 
-// ? For future: avatar max size: 124 x 124;
-
 module.exports = {
   upload,
 };
