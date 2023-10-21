@@ -27,7 +27,6 @@ const updateUser = async (req, res, next) => {
     }
     return next(HttpError(400, error.message));
   }
-  // ! Validation (above)
 
   let url;
   if (req.file?.path) {
@@ -42,7 +41,6 @@ const updateUser = async (req, res, next) => {
     await fs.rm(req.file.path);
     url = cloudResult.url;
   }
-  // ! Working with cloud and body validation (above)
 
   const updateResult = await findUserAndUpdate(req.user._id, {
     ...req.body,

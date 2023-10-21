@@ -45,30 +45,37 @@ const taskUpdateSchema = Joi.object({
   title: Joi.string()
     .max(250)
     .label("Title")
-    .messages({ "any.required": "Title is required" }),
+    .messages({ "any.required": "Title is required" })
+    .required(),
   start: Joi.string()
     .regex(TIME_REGEXP)
     .label("Start time")
     .messages({
       "string.pattern.base": `Invalid start time format. Please use ${timeFormat} format.`,
       "any.required": "Start time is required.",
-    }),
+    })
+    .required(),
   end: Joi.string()
     .regex(TIME_REGEXP)
     .label("End time")
     .messages({
       "string.pattern.base": `Invalid end time format. Please use ${timeFormat} format.`,
       "any.required": "End time is required.",
-    }),
-  priority: Joi.string().valid("low", "medium", "high").default("low"),
+    })
+    .required(),
+  priority: Joi.string()
+    .valid("low", "medium", "high")
+    .default("low")
+    .required(),
   date: Joi.string()
     .regex(DATE_REGEXP)
     .label("Date")
     .messages({
       "string.pattern.base": `Invalid date format. Please use ${dateFormat} format.`,
       "any.required": "Date is required.",
-    }),
-  category: Joi.string().valid("to-do", "in-progress", "done"),
+    })
+    .required(),
+  category: Joi.string().valid("to-do", "in-progress", "done").required(),
 });
 
 module.exports = { taskAddSchema, taskUpdateSchema };

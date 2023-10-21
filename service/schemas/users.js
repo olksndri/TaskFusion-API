@@ -21,8 +21,6 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      minlength: 6,
-      match: passRegexp,
       required: [true, "Set password for user"],
     },
     token: {

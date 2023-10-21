@@ -11,7 +11,7 @@ const tasksRouter = express.Router();
 
 tasksRouter.use(auth);
 
-tasksRouter.get("/", tasksController.getAll); // http://127.0.0.1:3000/tasks?year=2023&month=11
+tasksRouter.get("/", tasksController.getAll); 
 tasksRouter.post("/", tasksAddValidate, tasksController.add);
 tasksRouter.patch(
   "/:id",

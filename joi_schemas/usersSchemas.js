@@ -4,7 +4,15 @@ const { emailRegexp, passRegexp } = require("../service/schemas");
 const registerSchema = Joi.object({
   name: Joi.string().required(),
 
-  password: Joi.string().min(6).pattern(passRegexp).required(),
+  password: Joi.string()
+    .pattern(passRegexp)
+    .required()
+    .messages({
+      "string.pattern.base": `The password must contain at least one digit.
+The password must contain at least one lowercase letter (from a to z).
+The password must contain at least one capital letter (from A to Z).
+The password must be at least 6 characters long.`,
+    }),
 
   email: Joi.string().pattern(emailRegexp).required().messages({
     "string.pattern.base": "Email is invalid",

@@ -40,21 +40,12 @@ const add = async (req, res, next) => {
 
 const updateById = async (req, res, next) => {
   const { id } = req.params;
-  const { _id: owner } = req.user;
-
-  if (!owner) {
-    return next(HttpError(400, "Missing owner"));
-  }
 
   if (!req.body) {
     return next(HttpError(400, "Missing body of request"));
   }
 
-  const { title, start, end, priority, date, category } = req.body;
-
-  if (!title && !start && !end && !priority && !date && !category) {
-    return next(HttpError(400, "Missing fields"));
-  }
+  const { start, end } = req.body;
 
   if (start >= end) {
     return next(HttpError(400, "End time must be greater than Start time!"));
@@ -67,7 +58,7 @@ const updateById = async (req, res, next) => {
     next(HttpError(404, `Task with id ${id} not found`));
   }
 
-  res.json({ updatedTask , message: "Task successfully updated" });
+  res.json({ updatedTask, message: "Task successfully updated" });
 };
 
 const deleteById = async (req, res, next) => {
