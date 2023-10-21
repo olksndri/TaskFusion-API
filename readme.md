@@ -21,9 +21,6 @@
 TaskFusion-API **base-url**: https://taskfusion-service.onrender.com
 
 TaskFusion-API **swagger-документація**: https://taskfusion-service.onrender.com/api-docs/
-# 
-
-<br>
 
 # Повний стек технологій
 <div>
@@ -40,7 +37,6 @@ TaskFusion-API **swagger-документація**: https://taskfusion-service.
 <br> 
 
 # 
-<br> 
 
 # Команда розробників:
 coming soon....
