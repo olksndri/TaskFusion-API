@@ -4,26 +4,10 @@ const { HttpError } = require("../utilities/index.js");
 
 const { ctrlWrapper } = require("../decorators/index.js");
 
-const { findReviewByOwner, findAllUsers } = require("../service/index");
+const { findReviewByOwner } = require("../service/index");
 
 const getAll = async (req, res, next) => {
-  const reviews = await Review.find();
-  const users = await findAllUsers();
-
-  const result = reviews.map((review) => {
-    const { name } = users.find((user) => {
-      return String(user._id) === String(review.owner);
-    });
-    return {
-      name,
-      _id: review._id,
-      owner: review.owner,
-      comment: review.comment,
-      rating: review.rating,
-      createdAt: review.createdAt,
-      updatedAt: review.updatedAt,
-    };
-  });
+  const result = await Review.find().populate("owner", "avatar name");
 
   res.json(result);
 };
