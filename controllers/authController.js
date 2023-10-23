@@ -51,9 +51,9 @@ const loginCtrl = async (req, res, next) => {
     return next(HttpError(401, "Email or password is wrong"));
   }
 
-  const { _id: id, email: mail, name } = user;
+  const { _id: id, name } = user;
 
-  const userData = { name, mail };
+  const userData = { name, email };
 
   const payload = {
     id: user._id,
