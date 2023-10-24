@@ -53,16 +53,26 @@ const loginCtrl = async (req, res, next) => {
 
   const { _id: id, email: mail, name } = user;
 
-  const userData = { name, mail };
-
   const payload = {
     id: user._id,
   };
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
-  await User.findByIdAndUpdate(id, { token });
+  const result = await User.findByIdAndUpdate(id, { token });
 
-  res.json({ token, userData });
+  const userData = {
+    _id: result._id,
+    email: result.email,
+    name: result.name,
+    avatar: result.avatar,
+    birthday: result.birthday,
+    skype: result.skype,
+    phone: result.phone,
+  };
+
+  res.json({
+    userData,
+  });
 };
 
 const signout = async (req, res) => {
