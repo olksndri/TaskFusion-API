@@ -1202,7 +1202,7 @@
       },
       "UpdateTaskRequest": {
         "type": "object",
-        "required": ["title", "start", "end", "priority", "date", "category"],
+        "required": true,
         "properties": {
           "title": {
             "type": "string",
