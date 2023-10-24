@@ -58,7 +58,7 @@ const loginCtrl = async (req, res, next) => {
   };
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
-  const result = await User.findByIdAndUpdate(id, { token });
+  const result = await User.findByIdAndUpdate(user._id, { token });
 
   const userData = {
     _id: result._id,
@@ -70,9 +70,7 @@ const loginCtrl = async (req, res, next) => {
     phone: result.phone,
   };
 
-  res.json({
-    userData,
-  });
+  res.json({ token, userData });
 };
 
 const signout = async (req, res) => {

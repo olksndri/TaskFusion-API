@@ -747,8 +747,40 @@
           "userData": {
             "type": "object",
             "properties": {
-              "name": { "type": "string", "example": "Joe Doe" },
-              "email": { "type": "string", "format": "email" }
+              "_id": {
+                "type": "string",
+                "example": "some1351BSON142format232id"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Joe Doe"
+              },
+              "avatar": {
+                "type": "string",
+                "description": "User's avatar",
+                "example": "https://example.com/avatar/user123.jpg"
+              },
+              "birthday": {
+                "type": "string",
+                "description": "User's birthday",
+                "example": "03/01/1900"
+              },
+              "skype": {
+                "type": "string",
+                "description": "User's skype",
+                "example": "https://join.skype.com/invitehandle"
+              },
+              "phone": {
+                "type": "string",
+                "description": "User's phone number",
+                "example": "38 (097) 000 00 00"
+              }
             }
           }
         }
