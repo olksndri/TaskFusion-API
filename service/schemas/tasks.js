@@ -48,9 +48,48 @@ const taskSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
+const taskUpdateSchema = new Schema(
+  {
+    title: {
+      type: String,
+      max: 250,
+      default: "My Task",
+    },
+    start: {
+      type: String,
+      default: "09:00",
+    },
+    end: {
+      type: String,
+      default: "09:30",
+    },
+    priority: {
+      type: String,
+      enum: ["low", "medium", "high"],
+      default: "low",
+      trim: true,
+    },
+    date: {
+      type: String,
+      default: formatDate,
+    },
+    category: {
+      type: String,
+      enum: ["to-do", "in-progress", "done"],
+      default: "to-do",
+      trim: true,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
+  },
+  { versionKey: false, timestamps: true }
+);
+
 taskSchema.post("save", handleSaveError);
-taskSchema.pre("findOneAndUpdate", runValidateAtUpdate);
-taskSchema.post("findOneAndUpdate", handleSaveError);
+taskUpdateSchema.pre("findOneAndUpdate", runValidateAtUpdate);
+taskUpdateSchema.post("findOneAndUpdate", handleSaveError);
 
 const Task = model("task", taskSchema);
 

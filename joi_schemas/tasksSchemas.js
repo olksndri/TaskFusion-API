@@ -8,12 +8,12 @@ const taskAddSchema = Joi.object({
   title: Joi.string()
     .max(250)
     .required()
-    .label("Title")
+    .label("title")
     .messages({ "any.required": "Title is required" }),
   start: Joi.string()
     .regex(TIME_REGEXP)
     .required()
-    .label("Start time")
+    .label("start")
     .messages({
       "string.pattern.base": `Invalid start time format. Please use ${timeFormat} format.`,
       "any.required": "Start time is required.",
@@ -21,7 +21,7 @@ const taskAddSchema = Joi.object({
   end: Joi.string()
     .regex(TIME_REGEXP)
     .required()
-    .label("End time")
+    .label("end")
     .messages({
       "string.pattern.base": `Invalid end time format. Please use ${timeFormat} format.`,
       "any.required": "End time is required.",
@@ -33,7 +33,7 @@ const taskAddSchema = Joi.object({
   date: Joi.string()
     .regex(DATE_REGEXP)
     .required()
-    .label("Date")
+    .label("date")
     .messages({
       "string.pattern.base": `Invalid date format. Please use ${dateFormat} format.`,
       "any.required": "Date is required.",
@@ -42,40 +42,27 @@ const taskAddSchema = Joi.object({
 });
 
 const taskUpdateSchema = Joi.object({
-  title: Joi.string()
-    .max(250)
-    .label("Title")
-    .messages({ "any.required": "Title is required" })
-    .required(),
+  title: Joi.string().max(250).label("title"),
   start: Joi.string()
     .regex(TIME_REGEXP)
-    .label("Start time")
+    .label("start")
     .messages({
       "string.pattern.base": `Invalid start time format. Please use ${timeFormat} format.`,
-      "any.required": "Start time is required.",
-    })
-    .required(),
+    }),
   end: Joi.string()
     .regex(TIME_REGEXP)
-    .label("End time")
+    .label("end")
     .messages({
       "string.pattern.base": `Invalid end time format. Please use ${timeFormat} format.`,
-      "any.required": "End time is required.",
-    })
-    .required(),
-  priority: Joi.string()
-    .valid("low", "medium", "high")
-    .default("low")
-    .required(),
+    }),
+  priority: Joi.string().valid("low", "medium", "high"),
   date: Joi.string()
     .regex(DATE_REGEXP)
-    .label("Date")
+    .label("date")
     .messages({
       "string.pattern.base": `Invalid date format. Please use ${dateFormat} format.`,
-      "any.required": "Date is required.",
-    })
-    .required(),
-  category: Joi.string().valid("to-do", "in-progress", "done").required(),
-});
+    }),
+  category: Joi.string().valid("to-do", "in-progress", "done"),
+}).or("title", "start", "end", "priority", "date", "category");
 
 module.exports = { taskAddSchema, taskUpdateSchema };
