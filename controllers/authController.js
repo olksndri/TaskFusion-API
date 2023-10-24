@@ -51,16 +51,24 @@ const loginCtrl = async (req, res, next) => {
     return next(HttpError(401, "Email or password is wrong"));
   }
 
-  const { _id: id, name } = user;
-
-  const userData = { name, email };
+  // const { _id: id, email, name } = user;
 
   const payload = {
     id: user._id,
   };
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
-  await User.findByIdAndUpdate(id, { token });
+  const result = await User.findByIdAndUpdate(user._id, { token });
+
+  const userData = {
+    _id: result._id,
+    email: result.email,
+    name: result.name,
+    avatar: result.avatar,
+    birthday: result.birthday,
+    skype: result.skype,
+    phone: result.phone,
+  };
 
   res.json({ token, userData });
 };
