@@ -161,12 +161,10 @@
       }
     },
     "/google": {
-      "get": { "tags": ["Auth"], "summary": "Authorization through Google" }
-    },
-    "/google/callback": {
       "get": {
         "tags": ["Auth"],
-        "summary": "Authorization through Google callback"
+        "summary": "Google authentication",
+        "description": "It works with user registration and login. Does not return anything, after successful registration/login provides API information about the user, and embeds a token for authentication in the path for the frontend.\"Try it out\" button doesn't work for this endpoint."
       }
     },
     "/users/current": {
