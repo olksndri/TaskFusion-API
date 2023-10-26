@@ -1,18 +1,23 @@
 # Опис проєкту
+
 **TaskFusion-API** - є робочою серверною частиною додатка, який надає доступ до наступного функціоналу:
-  
+
 **Реєстрація та Логінізація.**
+
 - Користувачі можуть реєструватися, введені дані піддаються валідації.
 - Авторизовані користувачі можуть використовувати токени для здійснення запитів до API.
 
-**Управління Користувачами.**
+**Управління Користувачем.**
+
 - Авторизовані користувачі можуть переглядати та редагувати свій профіль, включаючи: аватар, ім'я, електронну пошту, дату народження, скайп та номер телефону.
 
 **Відгуки.**
+
 - Користувачі можуть переглядати всі відгуки збережені у базі даних.
 - Авторизовані користувачі можуть додавати свій відгук, редагувати та видаляти його.
 
 **Завдання.**
+
 - Авторизовані користувачі можуть переглядати свою колекцію завдань на місяць.
 - Авторизовані користувачі можуть створювати, редагувати та видаляти завдання.
 
@@ -23,6 +28,7 @@ TaskFusion-API **base-url**: https://taskfusion-service.onrender.com
 TaskFusion-API **swagger-документація**: https://taskfusion-service.onrender.com/api-docs/
 
 # Повний стек технологій
+
 <div>
 <img align="left" src="https://th.bing.com/th/id/OIP.fxMFAWgcs9ASnyZoIMeLJAHaHa?pid=ImgDet&rs=1" alt="JavaScript"  height="45">
 <img align="left" src="https://th.bing.com/th/id/OIP.JzMKygYxjaVL4OWIIl7sXgHaIb?pid=ImgDet&rs=1" alt="NodeJS"  height="45">
@@ -34,10 +40,10 @@ TaskFusion-API **swagger-документація**: https://taskfusion-service.
 <img align="left" src="https://play-lh.googleusercontent.com/3C-hB-KWoyWzZjUnRsXUPu-bqB3HUHARMLjUe9OmPoHa6dQdtJNW30VrvwQ1m7Pln3A" alt="JSONWebToken"  height="45">
 <img align="left" src="https://s3.amazonaws.com/media-p.slid.es/uploads/332149/images/2620503/Git-Icon-1788C.png" alt="Git"  height="45">
 </div>
-<br> 
+<br>
 
-# 
+#
 
-# Команда розробників:
+# Команда розробників
+
 coming soon....
-
