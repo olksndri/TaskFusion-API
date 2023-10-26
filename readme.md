@@ -35,9 +35,63 @@ TaskFusion-API **swagger-documentation**: https://taskfusion-service.onrender.co
 <img align="left" src="https://s3.amazonaws.com/media-p.slid.es/uploads/332149/images/2620503/Git-Icon-1788C.png" alt="Git"  height="45">
 </div>
 <br> 
-
-# 
+<br> 
+<br> 
 
 # Development team
-coming soon....
+<div>
+  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Back-end Team Lead and Full-stack developer Oleksandr Tymoshenko"  height="300">
+  <p><strong>Oleksandr Tymoshenko</strong></p>
+  <p>Role: <strong>Back-end Team Lead</strong> | <strong>Full-stack developer</strong></p>
+  <p><a href="https://www.linkedin.com/in/olksndr-tymoshenko/">Linkedin</a></p>
+  <p><a href="https://github.com/olksndri">GitHub</a></p>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div>
+  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Full-stack developer Tetiana Kabanova"  height="300">
+  <p><strong>Tetiana Kabanova</strong></p>
+  <p>Role: <strong>Full-stack developer</strong></p>
+  <p><a href="https://www.linkedin.com/in/tetiana-kabanova/">Linkedin</a></p>
+  <p><a href="https://github.com/TetianaKabanova">GitHub</a></p>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div>
+  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Full-stack developer Anton Burminskyi"  height="300">
+  <p><strong>Anton Burminskyi</strong></p>
+  <p>Role: <strong>Full-stack developer</strong></p>
+  <p><a href="https://www.linkedin.com/in/anton-burminskyi/">Linkedin</a></p>
+  <p><a href="https://github.com/Burminskyi">GitHub</a></p>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div>
+  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Full-stack developer Volodymyr Karaniuk"  height="300">
+  <p><strong>Volodymyr Karaniuk</strong></p>
+  <p>Role: <strong>Full-stack developer</strong></p>
+  <p><a href="https://www.linkedin.com/in/volodymyr-karaniuk/">Linkedin</a></p>
+  <p><a href="https://github.com/karanukvova">GitHub</a></p>
+</div>
 
