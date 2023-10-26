@@ -43,8 +43,8 @@ TaskFusion-API **swagger-documentation**: https://taskfusion-service.onrender.co
   <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Back-end Team Lead and Full-stack developer Oleksandr Tymoshenko"  height="200">
   <p><strong>Oleksandr Tymoshenko</strong></p>
   <p>Role: <strong>Back-end Team Lead</strong> | <strong>Full-stack developer</strong></p>
-  <p><a href="https://www.linkedin.com/in/olksndr-tymoshenko/">Linkedin</a></p>
-  <p><a href="https://github.com/olksndri">GitHub</a></p>
+  <p><a href="https://www.linkedin.com/in/olksndr-tymoshenko/" rel="noopener noreferrer" target="_blank">Linkedin</a></p>
+  <p><a href="https://github.com/olksndri" rel="noopener noreferrer" target="_blank">GitHub</a></p>
 </div>
 
 <br>
