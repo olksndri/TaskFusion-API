@@ -1,28 +1,34 @@
-# Project summary
-The **TaskFusion-API** is the working server part of the application that provides access to the following functionality:
+# Beschreibung des Projekts
 
-**Registration and Login.**
-- Users can register, and the input data is validated.
-- Authorized users can use tokens to make requests to the API.
+**TaskFusion-API** - ist der funktionierende Serverteil der Anwendung, der Zugang zu den folgenden Funktionen bietet:
 
-**User management.**
-- Authorized users can view and edit their profile, including: avatar, name, email, date of birth, Skype, and phone number.
+**Registrierung und Login.**
 
-**Reviews.**
-- Users can view all reviews stored in the database.
-- Authorized users can add, edit, and delete reviews.
+- Die Nutzer können sich registrieren, und die eingegebenen Daten unterliegen einer Validierung.
+- Autorisierte Benutzer können Token verwenden, um Anfragen an die API zu stellen.
 
-**Tasks.**
-- Authorized users can view their collection of tasks for the month.
-- Authorized users can create, edit, and delete tasks.
+**Benutzerverwaltung.**
 
-This API provides a secure and convenient way to interact with the application, while ensuring user authentication and authorization to protect data privacy.
+- Autorisierte Nutzer können ihr Profil einsehen und bearbeiten, einschließlich: Avatar, Name, E-Mail, Geburtsdatum, Skype und Telefonnummer.
+
+**Bewertungen.**
+
+- Die Benutzer können alle in der Datenbank gespeicherten Bewertungen einsehen.
+- Autorisierte Benutzer können Bewertungen hinzufügen, bearbeiten und löschen.
+
+**Aufgaben.**
+
+- Autorisierte Benutzer können ihre monatliche Aufgabensammlung einsehen.
+- Autorisierte Benutzer können Aufgaben erstellen, bearbeiten und löschen.
+
+Diese API bietet eine sichere und bequeme Möglichkeit, mit der Anwendung zu interagieren, und gewährleistet gleichzeitig die Benutzerauthentifizierung und -autorisierung zum Schutz der Daten.
 
 TaskFusion-API **base-url**: https://taskfusion-service.onrender.com
 
-TaskFusion-API **swagger-documentation**: https://taskfusion-service.onrender.com/api-docs/
+TaskFusion-API **swagger-dokumentation**: https://taskfusion-service.onrender.com/api-docs/
 
-# Full stack of technologies
+# Vollständiger Technologie-Stack
+
 <div>
 <img align="left" src="https://th.bing.com/th/id/OIP.fxMFAWgcs9ASnyZoIMeLJAHaHa?pid=ImgDet&rs=1" alt="JavaScript"  height="45">
 <img align="left" src="https://th.bing.com/th/id/OIP.JzMKygYxjaVL4OWIIl7sXgHaIb?pid=ImgDet&rs=1" alt="NodeJS"  height="45">
@@ -34,10 +40,10 @@ TaskFusion-API **swagger-documentation**: https://taskfusion-service.onrender.co
 <img align="left" src="https://play-lh.googleusercontent.com/3C-hB-KWoyWzZjUnRsXUPu-bqB3HUHARMLjUe9OmPoHa6dQdtJNW30VrvwQ1m7Pln3A" alt="JSONWebToken"  height="45">
 <img align="left" src="https://s3.amazonaws.com/media-p.slid.es/uploads/332149/images/2620503/Git-Icon-1788C.png" alt="Git"  height="45">
 </div>
-<br> 
+<br>
 
-# 
+#
 
-# Development team
+# Entwicklungsteam
+
 coming soon....
-
