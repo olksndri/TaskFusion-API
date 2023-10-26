@@ -40,7 +40,7 @@ TaskFusion-API **swagger-documentation**: https://taskfusion-service.onrender.co
 
 # Development team
 <div>
-  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Back-end Team Lead and Full-stack developer Oleksandr Tymoshenko"  height="300">
+  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Back-end Team Lead and Full-stack developer Oleksandr Tymoshenko"  height="200">
   <p><strong>Oleksandr Tymoshenko</strong></p>
   <p>Role: <strong>Back-end Team Lead</strong> | <strong>Full-stack developer</strong></p>
   <p><a href="https://www.linkedin.com/in/olksndr-tymoshenko/">Linkedin</a></p>
@@ -50,13 +50,9 @@ TaskFusion-API **swagger-documentation**: https://taskfusion-service.onrender.co
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
 
 <div>
-  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Full-stack developer Tetiana Kabanova"  height="300">
+  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Full-stack developer Tetiana Kabanova"  height="200">
   <p><strong>Tetiana Kabanova</strong></p>
   <p>Role: <strong>Full-stack developer</strong></p>
   <p><a href="https://www.linkedin.com/in/tetiana-kabanova/">Linkedin</a></p>
@@ -66,13 +62,9 @@ TaskFusion-API **swagger-documentation**: https://taskfusion-service.onrender.co
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
 
 <div>
-  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Full-stack developer Anton Burminskyi"  height="300">
+  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Full-stack developer Anton Burminskyi"  height="200">
   <p><strong>Anton Burminskyi</strong></p>
   <p>Role: <strong>Full-stack developer</strong></p>
   <p><a href="https://www.linkedin.com/in/anton-burminskyi/">Linkedin</a></p>
@@ -82,13 +74,9 @@ TaskFusion-API **swagger-documentation**: https://taskfusion-service.onrender.co
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
 
 <div>
-  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Full-stack developer Volodymyr Karaniuk"  height="300">
+  <img align="left" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Full-stack developer Volodymyr Karaniuk"  height="200">
   <p><strong>Volodymyr Karaniuk</strong></p>
   <p>Role: <strong>Full-stack developer</strong></p>
   <p><a href="https://www.linkedin.com/in/volodymyr-karaniuk/">Linkedin</a></p>
