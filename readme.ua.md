@@ -40,9 +40,9 @@ TaskFusion-API **swagger-документація**: https://taskfusion-service.
 <img align="left" src="https://play-lh.googleusercontent.com/3C-hB-KWoyWzZjUnRsXUPu-bqB3HUHARMLjUe9OmPoHa6dQdtJNW30VrvwQ1m7Pln3A" alt="JSONWebToken"  height="45">
 <img align="left" src="https://s3.amazonaws.com/media-p.slid.es/uploads/332149/images/2620503/Git-Icon-1788C.png" alt="Git"  height="45">
 </div>
-<br>
-
-#
+<br> 
+<br> 
+<br> 
 
 # Команда розробників
 <div>
