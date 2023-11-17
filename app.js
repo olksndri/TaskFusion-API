@@ -26,6 +26,10 @@ app.use("/users", userRouter);
 app.use("/reviews", reviewsRouter);
 app.use("/tasks", tasksRouter);
 
+app.use("/health-check", (req, res) => {
+  res.status(200).json({ message: "Ok" });
+});
+
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
